@@ -1,0 +1,19 @@
+BEGIN;
+--
+-- Create model CustomUser
+--
+CREATE TABLE "insta_backend_customuser" ("id" serial NOT NULL PRIMARY KEY, "password" varchar(128) NOT NULL, "last_login" timestamp with time zone NULL, "is_superuser" boolean NOT NULL, "username" varchar(150) NOT NULL UNIQUE, "first_name" varchar(150) NOT NULL, "last_name" varchar(150) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" boolean NOT NULL, "is_active" boolean NOT NULL, "date_joined" timestamp with time zone NOT NULL, "fav_color" varchar(200) NOT NULL);
+CREATE TABLE "insta_backend_customuser_groups" ("id" serial NOT NULL PRIMARY KEY, "customuser_id" integer NOT NULL, "group_id" integer NOT NULL);
+CREATE TABLE "insta_backend_customuser_user_permissions" ("id" serial NOT NULL PRIMARY KEY, "customuser_id" integer NOT NULL, "permission_id" integer NOT NULL);
+CREATE INDEX "insta_backend_customuser_username_7b779e43_like" ON "insta_backend_customuser" ("username" varchar_pattern_ops);
+ALTER TABLE "insta_backend_customuser_groups" ADD CONSTRAINT "insta_backend_customuser_customuser_id_group_id_2a695d7a_uniq" UNIQUE ("customuser_id", "group_id");
+ALTER TABLE "insta_backend_customuser_groups" ADD CONSTRAINT "insta_backend_custom_customuser_id_3626d3b9_fk_insta_bac" FOREIGN KEY ("customuser_id") REFERENCES "insta_backend_customuser" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "insta_backend_customuser_groups" ADD CONSTRAINT "insta_backend_custom_group_id_035214e4_fk_auth_grou" FOREIGN KEY ("group_id") REFERENCES "auth_group" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "insta_backend_customuser_groups_customuser_id_3626d3b9" ON "insta_backend_customuser_groups" ("customuser_id");
+CREATE INDEX "insta_backend_customuser_groups_group_id_035214e4" ON "insta_backend_customuser_groups" ("group_id");
+ALTER TABLE "insta_backend_customuser_user_permissions" ADD CONSTRAINT "insta_backend_customuser_customuser_id_permission_24246585_uniq" UNIQUE ("customuser_id", "permission_id");
+ALTER TABLE "insta_backend_customuser_user_permissions" ADD CONSTRAINT "insta_backend_custom_customuser_id_53ea30e7_fk_insta_bac" FOREIGN KEY ("customuser_id") REFERENCES "insta_backend_customuser" ("id") DEFERRABLE INITIALLY DEFERRED;
+ALTER TABLE "insta_backend_customuser_user_permissions" ADD CONSTRAINT "insta_backend_custom_permission_id_c0a32245_fk_auth_perm" FOREIGN KEY ("permission_id") REFERENCES "auth_permission" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "insta_backend_customuser_u_customuser_id_53ea30e7" ON "insta_backend_customuser_user_permissions" ("customuser_id");
+CREATE INDEX "insta_backend_customuser_u_permission_id_c0a32245" ON "insta_backend_customuser_user_permissions" ("permission_id");
+COMMIT;
