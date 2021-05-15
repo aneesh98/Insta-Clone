@@ -8,9 +8,21 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
+        print("I entered here bro")
         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
         token['fav_color'] = user.fav_color
         return token
+
+    def validate(self, attrs):
+        print("I entered here")
+        credentials = {
+            'username': '',
+            'password': attrs.get('password')
+        }
+        user_obj = CustomUser.objects.filter(email=attrs.get("username")).first()
+        if user_obj:
+            credentials['username'] = user_obj.username
+        return super().validate(credentials)
 
 class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
