@@ -8,13 +8,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     @classmethod
     def get_token(cls, user):
-        print("I entered here bro")
         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)
         token['fav_color'] = user.fav_color
         return token
 
     def validate(self, attrs):
-        print("I entered here")
         credentials = {
             'username': '',
             'password': attrs.get('password')

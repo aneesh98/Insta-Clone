@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import './Login.css';
-import { Link, useLocation, useRouteMatch, useHistory } from 'react-router-dom';
+import {
+    Link,
+    useLocation,
+    useRouteMatch,
+    useHistory,
+    Redirect,
+} from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import axiosInstance from '../commons/axiosApi';
+import { useAuth } from '../commons/auth-context/auth';
 import axios from 'axios';
 
 export default function Login(props) {
@@ -12,6 +19,8 @@ export default function Login(props) {
     const [password, setPassword] = useState('');
     const [alertShow, setAlertShow] = useState(false);
     let location = useLocation();
+    let auth = useAuth();
+    console.log(auth);
     let history = useHistory();
     let httpService = axiosInstance;
     function validateForm() {
@@ -22,15 +31,27 @@ export default function Login(props) {
         event.preventDefault();
         if (validateForm()) {
             try {
-                const response = httpService.post('/token/obtain', {
-                    email: email,
-                    password: password,
-                });
-                httpService.defaults.headers['Authorization'] =
-                    'JWT ' + response.data.access;
-                localStorage.setItem('access_token', response.data.access);
-                localStorage.setItem('refresh_token', response.data.refresh);
-                return response.data;
+                httpService
+                    .post('/token/obtain', {
+                        username: email,
+                        password: password,
+                    })
+                    .then((response) => {
+                        console.log(response);
+                        httpService.defaults.headers['Authorization'] =
+                            'JWT ' + response.data.access;
+                        localStorage.setItem(
+                            'access_token',
+                            response.data.access
+                        );
+                        localStorage.setItem(
+                            'refresh_token',
+                            response.data.refresh
+                        );
+                        auth.signin(undefined, {
+                            username: 'drunkbot',
+                        });
+                    });
             } catch (error) {
                 throw error;
             }
@@ -50,7 +71,13 @@ export default function Login(props) {
 				setTimeout(() => setAlertShow(false), 5000);
 			}
     }, [location]);
-    return (
+    return auth.user.access_token ? (
+        <Redirect
+            to={{
+                pathname: '/feed',
+            }}
+        />
+    ) : (
         <React.Fragment>
             <Alert
                 style={{
