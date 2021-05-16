@@ -6,6 +6,7 @@ export function ProvideAuth({ children }) {
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 export const useAuth = () => useContext(authContext);
+//This is a custom hook
 function useProvideAuth() {
     const [user, setUser] = useState({
         access_token: localStorage.getItem('access_token'),
@@ -22,7 +23,11 @@ function useProvideAuth() {
         }
     };
     const signout = (cb) => {
-        setUser(null);
+        localStorage.removeItem('access_token');
+        setUser({
+            access_token: null,
+            username: null,
+        });
         if (cb) {
             cb();
         }

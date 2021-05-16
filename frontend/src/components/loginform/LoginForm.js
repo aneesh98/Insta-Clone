@@ -9,15 +9,19 @@ import {
     useHistory,
     Redirect,
 } from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
+import { Alert, Modal } from 'react-bootstrap';
 import axiosInstance from '../commons/axiosApi';
 import { useAuth } from '../commons/auth-context/auth';
+import CustomModal from '../commons/loading-screen/loading-screen';
 import axios from 'axios';
 
 export default function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [alertShow, setAlertShow] = useState(false);
+    const [alertShow, setAlertShow] = useState({
+        registrationSuccess: false,
+        failedLogin: false,
+    });
     let location = useLocation();
     let auth = useAuth();
     console.log(auth);
@@ -49,8 +53,16 @@ export default function Login(props) {
                             response.data.refresh
                         );
                         auth.signin(undefined, {
-                            username: 'drunkbot',
+                            username: response.data.username,
                         });
+                    })
+                    .catch((error) => {
+                        if (error.response.status === 401) {
+                            setAlertShow({
+                                ...alertShow,
+                                failedLogin: true,
+                            });
+                        }
                     });
             } catch (error) {
                 throw error;
@@ -67,8 +79,14 @@ export default function Login(props) {
         );
         // prettier-ignore
         if (location.state?.displaySuccessAlert) {
-				setAlertShow(true);
-				setTimeout(() => setAlertShow(false), 5000);
+				setAlertShow({
+                    ...alertShow,
+                    registrationSuccess: true
+                });
+				setTimeout(() => setAlertShow({
+                    ...alertShow,
+                    registrationSuccess: false
+                }), 5000);
 			}
     }, [location]);
     return auth.user.access_token ? (
@@ -79,6 +97,37 @@ export default function Login(props) {
         />
     ) : (
         <React.Fragment>
+            <CustomModal display={alertShow.failedLogin} title="Login Failed">
+                {/* <p>Incorrect password or email. Please Try Again</p>
+                <Button
+                    style={{
+                        marginLeft: '40%',
+                    }}
+                    onClick={() =>
+                        setAlertShow({
+                            ...alertShow,
+                            failedLogin: false,
+                        })
+                    }
+                >
+                    Retry
+                </Button> */}
+                <CustomModal.Body>
+                    Incorrect password or email. Please retry.
+                </CustomModal.Body>
+                <CustomModal.Footer>
+                    <Button
+                        onClick={() =>
+                            setAlertShow({
+                                ...alertShow,
+                                failedLogin: false,
+                            })
+                        }
+                    >
+                        Retry
+                    </Button>
+                </CustomModal.Footer>
+            </CustomModal>
             <Alert
                 style={{
                     position: 'absolute',
@@ -87,7 +136,7 @@ export default function Login(props) {
                     width: '100%',
                 }}
                 variant={'success'}
-                show={alertShow}
+                show={alertShow.registrationSuccess}
             >
                 You've registered successfully! Login and explore...
             </Alert>

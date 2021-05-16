@@ -2,10 +2,12 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import { Spinner } from 'react-bootstrap';
+
 import './registration.css';
 import '../loginform/Login.css';
 import axiosInstance from '../commons/axiosApi';
-import LoadingScreen from '../commons/loading-screen/loading-screen';
+import CustomModal from '../commons/loading-screen/loading-screen';
 import { Redirect } from 'react-router-dom';
 export default class RegistrationForm extends React.Component {
     constructor(props) {
@@ -35,9 +37,18 @@ export default class RegistrationForm extends React.Component {
         let alertMessage = {};
         let blankExists = false;
         for (let [propName, propValue] of Object.entries(this.state)) {
-            if (['username', 'email', 'password', 'confirmPassword'].includes(propName)) {
-                if (propValue === null || propValue === undefined || propValue === '') {
-                    alertMessage['alert' + propName] = this.EMPTYMESSAGE[propName];
+            if (
+                ['username', 'email', 'password', 'confirmPassword'].includes(
+                    propName
+                )
+            ) {
+                if (
+                    propValue === null ||
+                    propValue === undefined ||
+                    propValue === ''
+                ) {
+                    alertMessage['alert' + propName] =
+                        this.EMPTYMESSAGE[propName];
                     blankExists = true;
                 } else {
                     alertMessage['alert' + propName] = '';
@@ -68,7 +79,7 @@ export default class RegistrationForm extends React.Component {
                                 redirectToLogin: true,
                                 showLoad: false,
                             }),
-                        4000,
+                        4000
                     );
                 });
         }
@@ -98,7 +109,10 @@ export default class RegistrationForm extends React.Component {
         }
         return (
             <React.Fragment>
-                <LoadingScreen display={this.state.showLoad} />
+                <CustomModal display={this.state.showLoad}>
+                    <Spinner animation="border" role="status" />
+                    <p>Please Wait...</p>
+                </CustomModal>
 
                 <div className="form-container m-350">
                     <h1 className="app-name">Register</h1>
@@ -108,26 +122,41 @@ export default class RegistrationForm extends React.Component {
                             <Form.Control
                                 placeholder="Enter username..."
                                 className="login-input thin-border"
-                                onChange={(se) => this.recordValue(se.target.value, 'username')}
+                                onChange={(se) =>
+                                    this.recordValue(
+                                        se.target.value,
+                                        'username'
+                                    )
+                                }
                             />
                             <Form.Control
                                 placeholder="Enter email..."
                                 type="email"
                                 className="login-input thin-border"
-                                onChange={(se) => this.recordValue(se.target.value, 'email')}
+                                onChange={(se) =>
+                                    this.recordValue(se.target.value, 'email')
+                                }
                             />
                             <Form.Control
                                 placeholder="Enter password..."
                                 type="password"
                                 className="login-input thin-border"
-                                onChange={(se) => this.recordValue(se.target.value, 'password')}
+                                onChange={(se) =>
+                                    this.recordValue(
+                                        se.target.value,
+                                        'password'
+                                    )
+                                }
                             />
                             <Form.Control
                                 placeholder="Confirm password..."
                                 type="password"
                                 className="login-input thin-border"
                                 onChange={(se) =>
-                                    this.recordValue(se.target.value, 'confirmPassword')
+                                    this.recordValue(
+                                        se.target.value,
+                                        'confirmPassword'
+                                    )
                                 }
                             />
                         </Form.Group>

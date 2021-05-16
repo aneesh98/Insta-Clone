@@ -20,7 +20,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         user_obj = CustomUser.objects.filter(email=attrs.get("username")).first()
         if user_obj:
             credentials['username'] = user_obj.username
-        return super().validate(credentials)
+        data = super().validate(credentials)
+        data['username'] = user_obj.username
+        return data
 
 class CustomUserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
