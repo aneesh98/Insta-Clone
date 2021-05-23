@@ -1,0 +1,7 @@
+dj-database-url==0.5.0
+Django==3.1.7
+djangorestframework-simplejwt==4.6.0
+djangorestframework==3.12.4
+python-dotenv==0.17.1
+celery==5.0.5
+psycopg2-binary==2.8.6
