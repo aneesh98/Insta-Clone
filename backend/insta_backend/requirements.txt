@@ -23,7 +23,6 @@ cryptography==2.8
 css-parser==1.0.4
 cssselect==1.1.0
 cssutils==1.0.2
-cupshelpers==1.0
 dbus-python==1.2.16
 defer==1.0.6
 defusedxml==0.6.0
