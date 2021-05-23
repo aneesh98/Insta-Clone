@@ -24,7 +24,6 @@ css-parser==1.0.4
 cssselect==1.1.0
 cssutils==1.0.2
 dbus-python==1.2.16
-defer==1.0.6
 defusedxml==0.6.0
 deluge==2.0.3
 Deprecated==1.2.7
