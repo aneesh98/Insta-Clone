@@ -7,7 +7,7 @@ import { Spinner } from 'react-bootstrap';
 import './registration.css';
 import '../loginform/Login.css';
 import axiosInstance from '../commons/axiosApi';
-import CustomModal from '../commons/loading-screen/loading-screen';
+import CustomModal from '../commons/custom-modal/custom-modal';
 import { Redirect } from 'react-router-dom';
 export default class RegistrationForm extends React.Component {
     constructor(props) {
@@ -81,6 +81,9 @@ export default class RegistrationForm extends React.Component {
                             }),
                         4000
                     );
+                })
+                .catch((error) => {
+                    console.log(error.response);
                 });
         }
     };
@@ -110,8 +113,20 @@ export default class RegistrationForm extends React.Component {
         return (
             <React.Fragment>
                 <CustomModal display={this.state.showLoad}>
-                    <Spinner animation="border" role="status" />
-                    <p>Please Wait...</p>
+                    <CustomModal.Body>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'space-evenly',
+                                height: 'inherit',
+                            }}
+                        >
+                            <Spinner animation="border" role="status" />
+                            <p>Please Wait...</p>
+                        </div>
+                    </CustomModal.Body>
                 </CustomModal>
 
                 <div className="form-container m-350">

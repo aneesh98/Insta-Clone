@@ -12,7 +12,7 @@ import {
 import { Alert, Modal } from 'react-bootstrap';
 import axiosInstance from '../commons/axiosApi';
 import { useAuth } from '../commons/auth-context/auth';
-import CustomModal from '../commons/loading-screen/loading-screen';
+import CustomModal from '../commons/custom-modal/custom-modal';
 import axios from 'axios';
 
 export default function Login(props) {
@@ -69,6 +69,12 @@ export default function Login(props) {
             }
         }
     }
+    const showAlertBox = (propName, status) => {
+        setAlertShow({
+            ...alertShow,
+            [propName]: status,
+        });
+    };
     useEffect(() => {
         window.history.replaceState(
             {
@@ -97,33 +103,17 @@ export default function Login(props) {
         />
     ) : (
         <React.Fragment>
-            <CustomModal display={alertShow.failedLogin} title="Login Failed">
-                {/* <p>Incorrect password or email. Please Try Again</p>
-                <Button
-                    style={{
-                        marginLeft: '40%',
-                    }}
-                    onClick={() =>
-                        setAlertShow({
-                            ...alertShow,
-                            failedLogin: false,
-                        })
-                    }
-                >
-                    Retry
-                </Button> */}
+            <CustomModal
+                display={alertShow.failedLogin}
+                title="Login Failed"
+                onClose={() => showAlertBox('failedLogin', false)}
+                closable
+            >
                 <CustomModal.Body>
                     Incorrect password or email. Please retry.
                 </CustomModal.Body>
                 <CustomModal.Footer>
-                    <Button
-                        onClick={() =>
-                            setAlertShow({
-                                ...alertShow,
-                                failedLogin: false,
-                            })
-                        }
-                    >
+                    <Button onClick={() => showAlertBox('failedLogin', false)}>
                         Retry
                     </Button>
                 </CustomModal.Footer>
@@ -143,7 +133,7 @@ export default function Login(props) {
             <div className="Login Login-Box m-350">
                 <h1 className="app-name">PhotoShare</h1>
                 {/* <Alert variant={'success'}>You've registered successfully! Login and explore...</Alert> */}
-                <Form onClick={handleSubmit}>
+                <Form>
                     <Form.Group controlId="formBasicEmail">
                         <br />
                         <Form.Control
@@ -160,7 +150,11 @@ export default function Login(props) {
                             onChange={(inp) => setPassword(inp.target.value)}
                         />
                     </Form.Group>
-                    <Button className="button" variant="primary" type="submit">
+                    <Button
+                        className="button"
+                        variant="primary"
+                        onClick={handleSubmit}
+                    >
                         Log In
                     </Button>
                 </Form>

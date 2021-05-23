@@ -1,7 +1,11 @@
+from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
-
+from django.core.mail import EmailMessage
 from .models import CustomUser
+import pdb
+
+from .tasks.tasks import send_confirmation_email
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -40,6 +44,11 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
+        instance.is_valid = False
         instance.save()
-
+        subject = 'PhotoShare Account Confirmation'
+        message = 'Dear User, \n Thank you for registering at photoshare. \n Regards, Photoshare Admin'
+        # print('Sending mail')
+        send_confirmation_email.delay(subject, message, validated_data.get('email'))
+        # print('mail sent')
         return instance
