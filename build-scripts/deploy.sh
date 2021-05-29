@@ -2,9 +2,9 @@
 
 set -x
 echo 'Generating Static Build Frontend'
-cd ../frontend
+cd ./frontend
 npm run relocate
 echo 'Frontend App Built Successfully'
 git subtree push --prefix backend/insta_backend heroku master
 set +x
-echo 'Served successfully. Access app from http://localhost:3000'
+echo 'Served successfully.'
