@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 import os
-
 from dotenv import load_dotenv
+import django_heroku
+
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 
@@ -189,3 +190,4 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Calcutta'
+django_heroku.settings(locals())
