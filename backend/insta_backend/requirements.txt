@@ -151,7 +151,6 @@ webencodings==0.5.1
 WebOb==1.8.5
 whitenoise==5.2.0
 wrapt==1.11.2
-xkit==0.0.0
 yarg==0.1.9
 zeroconf==0.24.4
 zope.interface==4.7.1
