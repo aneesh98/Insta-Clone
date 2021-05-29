@@ -142,7 +142,6 @@ tinycss==0.4
 tqdm==4.30.0
 traceback2==1.4.0
 Twisted==18.9.0
-unattended-upgrades==0.1
 unittest2==1.1.0
 unity-scope-calculator==0.1
 unity-scope-chromiumbookmarks==0.1
