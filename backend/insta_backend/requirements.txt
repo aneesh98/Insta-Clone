@@ -8,7 +8,6 @@ bcrypt==3.1.7
 beautifulsoup4==4.8.2
 billiard==3.6.4.0
 blinker==1.4
-breezy==3.0.2
 celery==5.0.5
 certifi==2019.11.28
 chardet==3.0.4
@@ -23,7 +22,6 @@ cryptography==2.8
 css-parser==1.0.4
 cssselect==1.1.0
 cssutils==1.0.2
-dbus-python==1.2.16
 defusedxml==0.6.0
 deluge==2.0.3
 Deprecated==1.2.7
@@ -90,12 +88,9 @@ psycopg2-binary==2.8.6
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pycairo==1.16.2
-pychm==0.8.6
 pycrypto==2.6.1
-pycups==1.9.73
 PyGithub==1.43.7
 Pygments==2.3.1
-PyGObject==3.36.0
 PyHamcrest==1.9.0
 pyinotify==0.9.6
 PyJWT==1.7.1
