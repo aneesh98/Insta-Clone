@@ -137,11 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "build/static")
+    os.path.join(BASE_DIR, "build/static"),
 ]
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 AUTH_USER_MODEL = 'insta_backend.CustomUser'
 
 ##### CUSTOM CONFIG #####
