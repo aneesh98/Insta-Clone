@@ -81,7 +81,6 @@ paramiko==2.6.0
 pbr==5.4.5
 pdfminer.six==20191020
 pexpect==4.6.0
-pikepdf==1.10.3+dfsg
 Pillow==7.0.0
 pipreqs==0.4.10
 prompt-toolkit==3.0.18
