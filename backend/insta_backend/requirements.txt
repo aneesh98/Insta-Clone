@@ -76,7 +76,6 @@ numpy==1.17.4
 oauth==1.0.1
 oauthlib==3.1.0
 olefile==0.46
-openshot-qt==2.4.3
 packaging==20.3
 PAM==0.4.2
 paramiko==2.6.0
