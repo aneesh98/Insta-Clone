@@ -3,6 +3,7 @@
 set -x
 echo 'Generating Static Build Frontend'
 cd ./frontend
+npm install
 npm run relocate
 echo 'Frontend App Built Successfully'
 git subtree push --prefix backend/insta_backend heroku master
