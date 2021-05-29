@@ -93,7 +93,6 @@ pycairo==1.16.2
 pychm==0.8.6
 pycrypto==2.6.1
 pycups==1.9.73
-pygame==1.9.6
 PyGithub==1.43.7
 Pygments==2.3.1
 PyGObject==3.36.0
