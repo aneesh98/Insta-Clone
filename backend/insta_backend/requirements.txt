@@ -77,7 +77,6 @@ oauth==1.0.1
 oauthlib==3.1.0
 olefile==0.46
 packaging==20.3
-PAM==0.4.2
 paramiko==2.6.0
 pbr==5.4.5
 pdfminer.six==20191020
