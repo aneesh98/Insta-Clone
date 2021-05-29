@@ -133,6 +133,7 @@ simplejson==3.16.0
 six==1.14.0
 sortedcontainers==2.1.0
 soupsieve==1.9.5
+soupsieve==1.9.5
 sqlparse==0.4.1
 ssh-import-id==5.10
 systemd-python==234
@@ -141,8 +142,6 @@ tinycss==0.4
 tqdm==4.30.0
 traceback2==1.4.0
 Twisted==18.9.0
-ubuntu-advantage-tools==20.3
-ubuntu-drivers-common==0.0.0
 ufw==0.36
 unattended-upgrades==0.1
 unittest2==1.1.0
