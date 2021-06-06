@@ -18,9 +18,9 @@ export default function Layout() {
                         <Route path="/register">
                             <RegistrationForm />
                         </Route>
-                        <Route path="/feed">
+                        <ProtectedRoute path="/feed">
                             <SimpleFeed />
-                        </Route>
+                        </ProtectedRoute>
                     </Switch>
                 </Router>
             </ProvideAuth>

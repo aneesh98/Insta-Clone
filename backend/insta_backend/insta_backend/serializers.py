@@ -49,6 +49,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
         subject = 'PhotoShare Account Confirmation'
         message = 'Dear User, \n Thank you for registering at photoshare. \n Regards, Photoshare Admin'
         # print('Sending mail')
-        send_confirmation_email.delay(subject, message, validated_data.get('email'))
+        # send_confirmation_email.delay(subject, message, validated_data.get('email'))
         # print('mail sent')
         return instance

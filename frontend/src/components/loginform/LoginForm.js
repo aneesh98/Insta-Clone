@@ -52,6 +52,10 @@ export default function Login(props) {
                             'refresh_token',
                             response.data.refresh
                         );
+                        localStorage.setItem(
+                            'username',
+                            response.data.username
+                        );
                         auth.signin(undefined, {
                             username: response.data.username,
                         });

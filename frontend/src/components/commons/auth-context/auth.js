@@ -10,7 +10,7 @@ export const useAuth = () => useContext(authContext);
 function useProvideAuth() {
     const [user, setUser] = useState({
         access_token: localStorage.getItem('access_token'),
-        username: null,
+        username: localStorage.getItem('username') || null,
     });
 
     const signin = (cb, { username }) => {
