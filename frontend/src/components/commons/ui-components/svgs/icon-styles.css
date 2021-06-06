@@ -1,0 +1,16 @@
+.nav-icon-top {
+    background-color: red;
+    position: absolute;
+    bottom: 50%;
+    right: 0;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 0.8em;
+    color: white;
+}
+.nav-icon {
+    position: relative;
+    padding-right: 8px;
+}

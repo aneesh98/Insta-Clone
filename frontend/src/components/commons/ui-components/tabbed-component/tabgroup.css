@@ -1,0 +1,35 @@
+.row-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.tab-group {
+    width: 80%;
+    border-top-width: thin;
+    border-top-style: solid;
+    border-top-color: gainsboro;
+    position: relative;
+}
+
+.tab-item {
+    /* display: inline-block; */
+    /* list-style: none; */
+    padding: 12px;
+    opacity: 0.4;
+    position: relative;
+    left: 5px;
+    top: -1px;
+    margin-left: 1rem;
+}
+
+.tab-item-active {
+    border-top: thin solid black;
+    opacity: 1;
+}
+.tab-item:active {
+    opacity: 0.1;
+}
+.tab-content {
+    padding: 10px;
+}

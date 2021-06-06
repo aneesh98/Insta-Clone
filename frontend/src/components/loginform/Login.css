@@ -32,13 +32,12 @@
     border-radius: 2px;
     background-color: white;
     line-height: 18px;
-    margin-top: 10px;
-    /* max-width: 350px; */
+    margin-top: 5px;
     height: 22em;
     position: relative;
     vertical-align: baseline;
     padding: 60px 0;
-    top: 70px;
+    top: 10px;
     left: 50%;
 }
 

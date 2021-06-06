@@ -7,19 +7,14 @@ import { faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import './custom-modal.css';
 const findByType = (children, component) => {
     const result = [];
-    console.log('findByType: component details ', component.name);
-    console.log('findByType: children details ', children);
     const type = [component.displayName || component.name];
-    console.log('findByType: type details ', type);
     React.Children.forEach(children, (child) => {
-        console.log('findByType: child details', child.type.name);
         const childType =
             child && child.type && (child.type.displayName || child.type.name);
         if (type.includes(childType)) {
             result.push(child);
         }
     });
-    console.log('findByType: result details ', result);
     return result[0];
 };
 const Header = () => null;
