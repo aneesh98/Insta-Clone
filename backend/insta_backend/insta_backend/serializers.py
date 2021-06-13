@@ -2,8 +2,9 @@ from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from django.core.mail import EmailMessage
-from .models import CustomUser
+from .models import CustomUser, ProfilePicture
 import pdb
+import os
 
 from .tasks.tasks import send_confirmation_email
 
@@ -26,6 +27,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             credentials['username'] = user_obj.username
         data = super().validate(credentials)
         data['username'] = user_obj.username
+        data['userid'] = user_obj.id
         return data
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -44,7 +46,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
-        instance.is_valid = False
+        instance.is_valid = True
         instance.save()
         subject = 'PhotoShare Account Confirmation'
         message = 'Dear User, \n Thank you for registering at photoshare. \n Regards, Photoshare Admin'
@@ -52,3 +54,40 @@ class CustomUserSerializer(serializers.ModelSerializer):
         # send_confirmation_email.delay(subject, message, validated_data.get('email'))
         # print('mail sent')
         return instance
+
+class ProfilePictureSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+    profile_photo = serializers.ImageField()
+    class Meta:
+        model = ProfilePicture
+        fields = ('user_id', 'profile_photo')
+
+    def create(self, data):
+        # instance = self.Meta.model(**data)
+        # extension = instance.profile_photo.name.split('.')[-1]
+        # instance.profile_photo.name = str(instance.user_id) + '_profile_photo.' +extension
+        # defaults = {
+        #     'profile_photo': instance.profile_photo.namee
+        # }
+        # instance.save()
+        # image_name = str(data['user_id']) + '_profile_photo.' + extension
+        # defaults = {
+        #     'profile_photo': image_name
+        # }
+        # user_id = data['user_id']
+        # obj, created = ProfilePicture.objects.update_or_create(user_id=user_id, defaults=defaults)
+        extension = data['profile_photo'].name.split('.')[-1]
+        image_name = str(data['user_id']) + '_profile_photo.' + extension
+        profile_photo_obj = data['profile_photo']
+        profile_photo_obj.name = image_name
+        defaults = {
+            'profile_photo': profile_photo_obj
+        }
+        user_id = data['user_id']
+        print(user_id)
+        obj, created = ProfilePicture.objects.update_or_create(user_id=user_id, defaults=defaults)
+        return obj
+
+    def update(self, instance, validated_data):
+        return
+

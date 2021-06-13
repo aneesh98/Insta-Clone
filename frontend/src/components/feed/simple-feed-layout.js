@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './feed-layout.css';
 import { useAuth } from '../commons/auth-context/auth';
 import Navbar from '../commons/ui-components/navbar/navbar';
@@ -9,23 +9,55 @@ import {
     SettingsIcon,
     TaggedIcon,
 } from '../commons/ui-components/svgs/custom-icons';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Spinner } from 'react-bootstrap';
 import dp from '../../user-files/profile-picture.jpeg';
 import FormButton from './modal-button';
+import axiosInstance from '../commons/axiosApi';
+import { getCookie } from '../utils/helpers';
+
 export default function SimpleFeed(props) {
     let auth = useAuth();
     let [modal, showModal] = useState(false);
+    useEffect(() => {
+        getProfilePictureUrl();
+    }, []);
+
+    const httpService = axiosInstance;
+    const getProfilePictureUrl = () => {
+        httpService.get('/getdp/' + auth.user.userid + '/').then((response) => {
+            auth.setProfilePicture(
+                'http://localhost:8000/insta_backend' +
+                    response.data.profile_photo
+            );
+        });
+    };
+    const uploadFile = (fileObj) => {
+        auth.setProfilePicture(null);
+        const userId = localStorage.getItem('userid');
+        let formData = new FormData();
+        formData.append('user_id', userId);
+        formData.append('profile_photo', fileObj);
+        httpService.POST_FORM_DATA('/setdp/', formData);
+        getProfilePictureUrl();
+        showModal(false);
+    };
     return (
         <div>
             <Navbar />
             <div className="feed-layout">
                 <div className="profile-detail-display">
                     <div onClick={() => showModal(!modal)}>
-                        <img
-                            src={dp}
-                            alt="Profile Photo"
-                            className="profile-picture"
-                        />
+                        {auth.user.profilePicture !== null ? (
+                            <img
+                                src={auth.user.profilePicture}
+                                alt="Profile Photo"
+                                className="profile-picture"
+                            />
+                        ) : (
+                            <div className="profile-picture">
+                                <Spinner animation="border" />
+                            </div>
+                        )}
                     </div>
                     <div className="detail-box">
                         <div className="d-flex flex-row profile-detail-display-row">
@@ -106,7 +138,11 @@ export default function SimpleFeed(props) {
                     </Modal.Header>
 
                     <Modal.Body>
-                        <FormButton label="Upload Photo" type="upload" />
+                        <FormButton
+                            label="Upload Photo"
+                            type="upload"
+                            onUpload={uploadFile}
+                        />
                         <div className="modal-body-custom cancel-button">
                             Remove Current Photo
                         </div>

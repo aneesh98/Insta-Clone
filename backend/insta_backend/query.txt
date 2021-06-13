@@ -1,0 +1,8 @@
+BEGIN;
+--
+-- Create model ProfilePicture
+--
+CREATE TABLE "insta_backend_profilepicture" ("id" serial NOT NULL PRIMARY KEY, "profile_photo" varchar(100) NOT NULL, "user_id" integer NOT NULL);
+ALTER TABLE "insta_backend_profilepicture" ADD CONSTRAINT "insta_backend_profil_user_id_e8c88be2_fk_insta_bac" FOREIGN KEY ("user_id") REFERENCES "insta_backend_customuser" ("id") DEFERRABLE INITIALLY DEFERRED;
+CREATE INDEX "insta_backend_profilepicture_user_id_e8c88be2" ON "insta_backend_profilepicture" ("user_id");
+COMMIT;

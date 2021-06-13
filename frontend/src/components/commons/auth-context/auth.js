@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 
 const authContext = createContext();
-export function ProvideAuth({ children }) {
+export function UserContext({ children }) {
     const auth = useProvideAuth();
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
@@ -11,12 +11,15 @@ function useProvideAuth() {
     const [user, setUser] = useState({
         access_token: localStorage.getItem('access_token'),
         username: localStorage.getItem('username') || null,
+        userid: localStorage.getItem('userid') || null,
+        profilePicture: null,
     });
 
-    const signin = (cb, { username }) => {
+    const signin = (cb, { username, userid }) => {
         setUser({
             access_token: localStorage.getItem('access_token'),
             username: username,
+            userid: userid,
         });
         if (cb) {
             cb();
@@ -32,9 +35,16 @@ function useProvideAuth() {
             cb();
         }
     };
+    const setProfilePicture = (photoObj) => {
+        setUser({
+            ...user,
+            profilePicture: photoObj,
+        });
+    };
     return {
         user,
         signin,
         signout,
+        setProfilePicture,
     };
 }

@@ -56,8 +56,10 @@ export default function Login(props) {
                             'username',
                             response.data.username
                         );
+                        localStorage.setItem('userid', response.data.userid);
                         auth.signin(undefined, {
                             username: response.data.username,
+                            userid: response.data.userid,
                         });
                     })
                     .catch((error) => {

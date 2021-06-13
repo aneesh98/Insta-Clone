@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.shortcuts import render
 from django.urls import include, path, re_path
+from django.conf import settings
+from django.conf.urls.static import static
 
 def render_react(request):
     return render(request, "index.html")
@@ -26,4 +28,5 @@ urlpatterns = [
     re_path('r"^$', render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ]
+
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './feed-layout.css';
 export default function FormButton(props) {
     const [file, setFile] = useState(null);
@@ -10,6 +10,11 @@ export default function FormButton(props) {
     const onFileClick = () => {
         inputFileNode.current.click();
     };
+    useEffect(() => {
+        if (file) {
+            props.onUpload(file);
+        }
+    }, [file]);
     const Button = () => {
         if (type === 'upload') {
             return (
