@@ -13,5 +13,7 @@ urlpatterns = [
     path('token/refresh', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('hello/', HelloWorld.as_view(), name='hello_world'),
     path('setdp/', ProfilePictureUpload.as_view(), name='profile_picture_upload'),
-    path('getdp/<int:pk>/', views.get_profile_picture_path)
+    path('getdp/<int:pk>/', views.get_profile_picture_path),
+    path('upload_image/', views.post_user_images),
+    path('user_images/<int:user_id>', views.get_user_images)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

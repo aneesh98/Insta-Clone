@@ -60,7 +60,6 @@ axiosInstance.POST_FORM_DATA = (url, formData) => {
     const headers = {
         'content-type': 'multipart/form-data',
     };
-    console.log(headers);
-    axiosInstance.post(url, formData, headers);
+    return axiosInstance.post(url, formData, headers);
 };
 export default axiosInstance;

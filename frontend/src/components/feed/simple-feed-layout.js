@@ -14,12 +14,16 @@ import dp from '../../user-files/profile-picture.jpeg';
 import FormButton from './modal-button';
 import axiosInstance from '../commons/axiosApi';
 import { getCookie } from '../utils/helpers';
+import AddButton from '../commons/ui-components/add-button/add-button';
+import UserImagesView from '../user-images-view/images-view';
 
 export default function SimpleFeed(props) {
     let auth = useAuth();
     let [modal, showModal] = useState(false);
+    let [userImagesList, setUserImagesList] = useState([]);
     useEffect(() => {
         getProfilePictureUrl();
+        getUserUploadedImages();
     }, []);
 
     const httpService = axiosInstance;
@@ -37,9 +41,25 @@ export default function SimpleFeed(props) {
         let formData = new FormData();
         formData.append('user_id', userId);
         formData.append('profile_photo', fileObj);
-        httpService.POST_FORM_DATA('/setdp/', formData);
-        getProfilePictureUrl();
-        showModal(false);
+        httpService.POST_FORM_DATA('/setdp/', formData).then(() => {
+            getProfilePictureUrl();
+            showModal(false);
+        });
+    };
+    const uploadImage = (fileObj) => {
+        const userId = localStorage.getItem('userid');
+        let formData = new FormData();
+        formData.append('user_id', userId);
+        formData.append('image', fileObj);
+        httpService.POST_FORM_DATA('/upload_image/', formData, () => {});
+    };
+    const getUserUploadedImages = () => {
+        const userId = localStorage.getItem('userid');
+        httpService.get('/user_images/' + userId).then((response) => {
+            let imagesList = response.data.map((item) => item['image']);
+            console.log(imagesList);
+            setUserImagesList(imagesList);
+        });
     };
     return (
         <div>
@@ -97,7 +117,28 @@ export default function SimpleFeed(props) {
                         }
                         tabId="1"
                     >
-                        <div>Tab1 Content</div>
+                        <div>
+                            <div
+                            // style={{
+                            //     position: 'relative',
+                            //     top: '50px',
+                            //     left: '40%',
+                            // }}
+                            >
+                                <FormButton
+                                    label={
+                                        <Button variant="secondary">
+                                            Upload Photo
+                                        </Button>
+                                    }
+                                    onUpload={uploadImage}
+                                    type="upload"
+                                />
+                            </div>
+                            <div>
+                                <UserImagesView imagesList={userImagesList} />
+                            </div>
+                        </div>
                     </TabGroup.Tab>
                     <TabGroup.Tab
                         label={

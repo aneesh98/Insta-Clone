@@ -1,8 +1,12 @@
+from datetime import datetime
+
 from django.conf import settings
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 from django.core.mail import EmailMessage
-from .models import CustomUser, ProfilePicture
+from .models import CustomUser, ProfilePicture, UserImages
+import yaml
+from pathlib import Path
 import pdb
 import os
 
@@ -55,6 +59,22 @@ class CustomUserSerializer(serializers.ModelSerializer):
         # print('mail sent')
         return instance
 
+class UserImageSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+    image = serializers.ImageField()
+
+    class Meta:
+        model = UserImages
+        fields = ('user_id', 'image')
+
+    def create(self, data):
+        curr_time = datetime.now()
+        original_image_name = Path(data['image'].name)
+        image_name = str(data['user_id']) + '_' + curr_time.strftime('%m_%d_%Y-%H:%M:%S')
+        new_image_name = image_name + Path(original_image_name).suffix
+        data['image'].name = new_image_name
+        return UserImages.objects.create(**data)
+
 class ProfilePictureSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField()
     profile_photo = serializers.ImageField()
@@ -77,9 +97,12 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
         # user_id = data['user_id']
         # obj, created = ProfilePicture.objects.update_or_create(user_id=user_id, defaults=defaults)
         extension = data['profile_photo'].name.split('.')[-1]
-        image_name = str(data['user_id']) + '_profile_photo.' + extension
+        profile_photo_name = Path(data['profile_photo'].name)
+        curr_time = datetime.now()
+        image_name = str(data['user_id']) + '_profile_photo_' + curr_time.strftime('%m_%d_%Y-%H:%M:%S')
         profile_photo_obj = data['profile_photo']
-        profile_photo_obj.name = image_name
+        profile_photo_obj.name = image_name + profile_photo_name.suffix
+        print(profile_photo_obj.name)
         defaults = {
             'profile_photo': profile_photo_obj
         }

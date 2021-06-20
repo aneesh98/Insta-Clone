@@ -1,0 +1,8 @@
+.image-explorer-container {
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+    min-width: 100%;
+    justify-content: left;
+    row-gap: 25px;
+    column-gap: 25px;
+}
