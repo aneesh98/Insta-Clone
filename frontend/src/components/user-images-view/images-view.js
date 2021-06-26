@@ -15,11 +15,7 @@ export default class UserImagesView extends Component {
         return (
             <div className="image-explorer-container">
                 {this.props.imagesList?.map((image_url) => (
-                    <img
-                        src={'http://localhost:8000/insta_backend' + image_url}
-                        height="250"
-                        width="250"
-                    />
+                    <img src={image_url} height="250" width="250" />
                 ))}
             </div>
         );

@@ -6,3 +6,8 @@
     row-gap: 25px;
     column-gap: 25px;
 }
+
+img:hover {
+    filter: brightness(60%);
+    cursor: pointer;
+}

@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +90,14 @@ WSGI_APPLICATION = 'app_server.wsgi.application'
 MEDIA_ROOT = '/media/aneesh/TheMystery/photo_share_file_storage/'
 MEDIA_URL = '/photo_share_files/'
 
+
+AWS_STORAGE_BUCKET_NAME = 'photo-share-bucket1'
+AWS_S3_REGION_NAME = 'ap-south-1'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_KEY')
+
+# Tell django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3-ap-south-1.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 

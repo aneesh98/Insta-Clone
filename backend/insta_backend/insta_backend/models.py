@@ -6,7 +6,7 @@ from pathlib import Path
 import yaml
 
 from .file_utils import get_user_images_path
-from .storage import OverwriteStorage
+from .storage import OverwriteStorage, MediaStorage
 
 
 class CustomUser(AbstractUser):
@@ -26,4 +26,4 @@ class ProfilePicture(models.Model):
 
 class UserImages(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    image = ImageField(upload_to=get_user_images_path)
+    image = ImageField(upload_to=get_user_images_path, storage=MediaStorage())

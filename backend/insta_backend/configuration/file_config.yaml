@@ -1,3 +1,3 @@
 user_file_upload_dirs:
   profile_picture: profile photos/
-  custom_images: user_uploded_images/
+  custom_images: user_uploaded_images/
