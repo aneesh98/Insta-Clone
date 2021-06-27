@@ -1,0 +1,54 @@
+.image-explorer-root {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 5%;
+    background-color: white;
+    left: 20%;
+    height: 90%;
+    width: 60%;
+}
+
+.image-explorer-root::before {
+    content: '';
+    display: block;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    z-index: 100;
+}
+
+.left-arrow {
+    background-image: url('./icon-set.png');
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    background-position: -177px -130px;
+}
+
+.right-arrow {
+    background-image: url('./icon-set.png');
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    background-position: -262px -183px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    cursor: pointer;
+}

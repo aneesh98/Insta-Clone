@@ -6,6 +6,6 @@ export default class ImageView extends React.Component {
         this.state = {};
     }
     render() {
-        return <> </>;
+        return <div> </div>;
     }
 }

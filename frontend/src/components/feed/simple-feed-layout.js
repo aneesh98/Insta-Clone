@@ -57,7 +57,6 @@ export default function SimpleFeed(props) {
         const userId = localStorage.getItem('userid');
         httpService.get('/user_images/' + userId).then((response) => {
             let imagesList = response.data.map((item) => item['image']);
-            console.log(imagesList);
             setUserImagesList(imagesList);
         });
     };

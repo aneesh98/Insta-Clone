@@ -55,9 +55,7 @@ export default class RegistrationForm extends React.Component {
                 }
             }
         }
-        console.log(alertMessage);
         this.setState(alertMessage);
-        console.log('Status of validation is ', blankExists);
         return !blankExists;
     };
     handleSubmit = (event) => {

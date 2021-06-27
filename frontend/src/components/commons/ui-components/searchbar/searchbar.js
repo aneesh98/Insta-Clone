@@ -9,7 +9,6 @@ function useOutsideAlerter(ref, changeState) {
                 changeState(false);
             }
         }
-        console.log(ref);
         // Bind the event listener
         document.addEventListener('mousedown', handleClickOutside);
         return () => {

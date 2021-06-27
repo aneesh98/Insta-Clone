@@ -22,7 +22,6 @@ class TabGroup extends React.Component {
             state: { activeTab },
         } = this;
         const tablist = findByType(children, Tab);
-        console.log(tablist);
         return (
             <div className="tab-group">
                 <div className="row-flex">

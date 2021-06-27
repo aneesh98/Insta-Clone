@@ -7,7 +7,7 @@
     column-gap: 25px;
 }
 
-img:hover {
+.image-explorer-container > img:hover {
     filter: brightness(60%);
     cursor: pointer;
 }

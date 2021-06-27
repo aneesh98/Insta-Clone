@@ -24,7 +24,6 @@ export default function Login(props) {
     });
     let location = useLocation();
     let auth = useAuth();
-    console.log(auth);
     let history = useHistory();
     let httpService = axiosInstance;
     function validateForm() {

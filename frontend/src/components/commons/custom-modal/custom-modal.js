@@ -69,9 +69,7 @@ class CustomModal extends React.Component {
     }
     renderBody() {
         const { children } = this.props;
-        console.log(children);
         const body = findByType(children, Body);
-        console.log(body);
         if (!body) {
             return null;
         }

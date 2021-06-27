@@ -1,7 +1,6 @@
 import React from 'react';
 
 export const findByType = (children, component) => {
-    console.log(children);
     const result = [];
     const type = [component.displayName || component.name];
     React.Children.forEach(children, (child) => {
