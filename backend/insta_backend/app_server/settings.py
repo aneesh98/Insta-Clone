@@ -184,8 +184,11 @@ SIMPLE_JWT = {
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
+    'http://192.168.0.109:3000',
     'http://localhost:8000',
+    'http://192.168.0.109:8000'
 ]
+
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'

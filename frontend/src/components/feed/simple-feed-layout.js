@@ -95,7 +95,10 @@ export default function SimpleFeed(props) {
                         </div>
                         <div className="d-flex flex-row profile-detail-display-row">
                             <h3 className="detail-row padding sub-detail">
-                                <span className="fw-600">0</span> posts
+                                <span className="fw-600">
+                                    {auth.user.postsCount}
+                                </span>{' '}
+                                posts
                             </h3>
                             <h3 className="detail-row padding sub-detail">
                                 <span className="fw-600">0</span> followers

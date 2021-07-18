@@ -59,6 +59,7 @@ export default function Login(props) {
                         auth.signin(undefined, {
                             username: response.data.username,
                             userid: response.data.userid,
+                            posts_count: response.data.posts_count,
                         });
                     })
                     .catch((error) => {

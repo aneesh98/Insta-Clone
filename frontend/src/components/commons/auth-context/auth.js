@@ -13,13 +13,16 @@ function useProvideAuth() {
         username: localStorage.getItem('username') || null,
         userid: localStorage.getItem('userid') || null,
         profilePicture: null,
+        postsCount: 0,
     });
 
-    const signin = (cb, { username, userid }) => {
+    const signin = (cb, { username, userid, posts_count }) => {
         setUser({
+            ...user,
             access_token: localStorage.getItem('access_token'),
             username: username,
             userid: userid,
+            postsCount: posts_count,
         });
         if (cb) {
             cb();
@@ -28,6 +31,7 @@ function useProvideAuth() {
     const signout = (cb) => {
         localStorage.removeItem('access_token');
         setUser({
+            ...user,
             access_token: null,
             username: null,
         });
@@ -41,10 +45,20 @@ function useProvideAuth() {
             profilePicture: photoObj,
         });
     };
+    const setPostCount = (count) => {
+        console.log('Triggered spc with value ', count);
+        setUser({
+            ...user,
+            postsCount: count,
+        });
+    };
+    const getPostCount = () => user.postsCount;
     return {
         user,
         signin,
         signout,
         setProfilePicture,
+        setPostCount,
+        getPostCount,
     };
 }

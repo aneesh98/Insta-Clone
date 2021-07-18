@@ -32,6 +32,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(credentials)
         data['username'] = user_obj.username
         data['userid'] = user_obj.id
+        image_count = UserImages.objects.all().count()
+        data['posts_count'] = image_count
         return data
 
 class CustomUserSerializer(serializers.ModelSerializer):

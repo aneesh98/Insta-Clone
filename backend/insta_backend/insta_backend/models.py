@@ -11,6 +11,8 @@ from .storage import OverwriteStorage, MediaStorage
 
 class CustomUser(AbstractUser):
     fav_color = models.CharField(blank=True, max_length=200)
+    followers = models.ManyToManyField("self", blank=True)
+    following = models.ManyToManyField("self", blank=True)
 
 def get_profile_picture_path(instance, filename):
     with open("configuration/file_config.yaml", "r") as file:
