@@ -13,6 +13,11 @@ export const findByType = (children, component) => {
     return result;
 };
 
+export const resolveResource = (endpoint, port) => {
+    return window.location.protocol + "//" + window.location.hostname + ":" + port 
+    + "/insta_backend" + endpoint;
+}
+
 export const getCookie = (name) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {

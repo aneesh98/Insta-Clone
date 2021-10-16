@@ -29,3 +29,7 @@ class ProfilePicture(models.Model):
 class UserImages(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     image = ImageField(upload_to=get_user_images_path, storage=MediaStorage())
+
+class RecentSearch(models.Model):
+    user_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='searching_user')
+    followed_id = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='searched_user')

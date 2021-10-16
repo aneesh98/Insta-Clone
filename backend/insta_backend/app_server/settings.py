@@ -33,7 +33,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
-'https://mighty-caverns-57560.herokuapp.com/'
+'https://mighty-caverns-57560.herokuapp.com/',
+'photoshare-backend-dev.ap-south-1.elasticbeanstalk.com'
 ]
 
 
@@ -101,18 +102,30 @@ AWS_S3_CUSTOM_DOMAIN = '%s.s3-ap-south-1.amazonaws.com' % AWS_STORAGE_BUCKET_NAM
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta_clone_db',
-        'USER': 'psql_user',
-        'PASSWORD': 'psql@2020',
-        'HOST': 'localhost',
-        'PORT': '5432'
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'insta_clone_db',
+            'USER': 'psql_user',
+            'PASSWORD': 'psql@2020',
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
+    }
 
-DATABASES['default'].update(db_from_env)
+# DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -186,7 +199,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:3000',
     'http://192.168.0.109:3000',
     'http://localhost:8000',
-    'http://192.168.0.109:8000'
+    'http://192.168.0.109:8000',
+    'http://photoshare-backend-dev.ap-south-1.elasticbeanstalk.com'
 ]
 
 

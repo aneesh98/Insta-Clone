@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../../loginform/Login.css';
-import DialogBox from '../floating-dialog/dialog-box';
 import ProfileMenu from '../profile-menu/profile-menu';
 import SearchBar from '../searchbar/searchbar';
 import { ChatIcon, HomeIcon, NotificationIcon } from '../svgs/custom-icons';
@@ -30,7 +29,7 @@ export default class Navbar extends React.Component {
                         <ChatIcon number={5} />
                     </div>
                     <div className="nav-item">
-                        <NotificationIcon number={5} />
+                        <NotificationIcon number={7} />
                     </div>
                     <div>
                         <ProfileMenu />
