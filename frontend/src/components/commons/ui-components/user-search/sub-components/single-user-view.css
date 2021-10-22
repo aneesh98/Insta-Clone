@@ -1,0 +1,26 @@
+.user-display {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.user-name-text {
+    color: gray;
+}
+
+.root-view {
+    display: flex;
+    flex-direction: row;
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    cursor: pointer;
+    width: 100%;
+    min-height: 4rem;
+    margin-left: 0;
+    /* left: 0; */
+}
+
+.root-view:hover {
+    background-color: rgba(232, 232, 232, 0.4);
+}

@@ -6,10 +6,13 @@ import yaml
 def clear_directory(dir_path):
     root_path = Path(settings.MEDIA_ROOT)
     path = Path.joinpath(root_path, dir_path)
-    for file in os.listdir(path):
-        abs_path = Path.joinpath(path, file)
-        if os.path.isfile(abs_path):
-            os.remove(abs_path)
+    try:
+        for file in os.listdir(path):
+            abs_path = Path.joinpath(path, file)
+            if os.path.isfile(abs_path):
+                os.remove(abs_path)
+    except FileNotFoundError:
+        return
 
 def read_config_file():
     with open("configuration/file_config.yaml", "r") as file:

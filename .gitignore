@@ -1,2 +1,4 @@
 frontend/node_modules/*
 backend/pyenv/*
+backend/insta_backend/build/*
+backend/insta_backend/*/__pycache__/*

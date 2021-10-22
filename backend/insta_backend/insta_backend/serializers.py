@@ -8,6 +8,7 @@ from .models import CustomUser, ProfilePicture, UserImages
 import yaml
 from pathlib import Path
 import pdb
+from . import models
 import os
 
 from .tasks.tasks import send_confirmation_email
@@ -115,4 +116,24 @@ class ProfilePictureSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         return
+
+class UserListSerializer(serializers.ModelSerializer):
+    following = serializers.SerializerMethodField()
+    class Meta:
+        model = models.CustomUser
+        fields = (
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'date_joined',
+            'following'
+        )
+
+    def get_following(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if obj in request.user.following.all():
+                return True
+        return False
 

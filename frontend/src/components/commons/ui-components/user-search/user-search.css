@@ -1,0 +1,42 @@
+.head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    left: 0;
+    position: absolute;
+}
+
+.head h5 {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.head h6 {
+    color: rgb(0, 149, 246);
+}
+.gray-text {
+    color: gray;
+    font-weight: 600;
+}
+ul.no-bullets {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 !important;
+    width: 100%;
+}
+/* p {
+    text-align: center;
+    color: gray;
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    font-weight: 600;
+} */

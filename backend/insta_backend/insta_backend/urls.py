@@ -15,5 +15,7 @@ urlpatterns = [
     path('setdp/', ProfilePictureUpload.as_view(), name='profile_picture_upload'),
     path('getdp/<int:pk>/', views.get_profile_picture_path),
     path('upload_image/', views.post_user_images),
-    path('user_images/<int:user_id>', views.get_user_images)
+    path('explore/', views.ExploreUsers.as_view(), name='explore_users'),
+    path('user_images/<int:user_id>', views.get_user_images),
+    path('search/<str:user_name>', views.search_user)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
