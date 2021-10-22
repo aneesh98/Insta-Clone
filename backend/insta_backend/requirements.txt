@@ -25,7 +25,7 @@
 # insta_backend/insta_backend/views.py: 5
 # insta_backend/manage.py: 11
 Django == 3.1.7
-awsebcli == 3.20.1
+awsebcli
 # insta_backend/insta_backend/file_utils.py: 4
 # insta_backend/insta_backend/models.py: 6
 # insta_backend/insta_backend/serializers.py: 8
@@ -59,6 +59,6 @@ python_dotenv == 0.17.1
 psycopg2-binary==2.8.6
 gunicorn==20.1.0
 django-cors-headers==3.8.0
-boto3==1.17.106
+boto3
 django-storages==1.11.1
 pillow
