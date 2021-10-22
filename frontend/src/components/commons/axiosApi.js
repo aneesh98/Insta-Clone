@@ -8,7 +8,6 @@ const url =
     '//' +
     window.location.hostname +
     '/insta_backend/';
-console.log(url);
 const axiosInstance = axios.create({
     baseURL: url,
     timeout: 5000,
@@ -21,14 +20,11 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-        console.log(error);
         const originalRequest = error.config;
-        console.log(originalRequest);
         if (
             error.response.status === 401 &&
             error.response.statusText === 'Unauthorized'
         ) {
-            console.log('Entered Dead Zone');
             const refresh_token = localStorage.getItem('refresh_token');
             const refreshAxiosInstance = axios.create({
                 baseURL: 'http://192.168.0.108:8000/insta_backend/',

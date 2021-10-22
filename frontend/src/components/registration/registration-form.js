@@ -80,9 +80,7 @@ export default class RegistrationForm extends React.Component {
                         4000
                     );
                 })
-                .catch((error) => {
-                    console.log(error.response);
-                });
+                .catch((error) => {});
         }
     };
     recordValue = (value, typeOfValue) => {

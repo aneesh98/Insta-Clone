@@ -46,7 +46,6 @@ function useProvideAuth() {
         });
     };
     const setPostCount = (count) => {
-        console.log('Triggered spc with value ', count);
         setUser({
             ...user,
             postsCount: count,

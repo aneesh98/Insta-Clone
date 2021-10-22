@@ -40,7 +40,6 @@ export default function Login(props) {
                         password: password,
                     })
                     .then((response) => {
-                        console.log(response);
                         httpService.defaults.headers['Authorization'] =
                             'JWT ' + response.data.access;
                         localStorage.setItem(

@@ -30,9 +30,7 @@ class CustomModal extends React.Component {
     }
     componentWillUnmount() {}
     operateChildren = (children) => {
-        React.Children.forEach(children, (child) => {
-            console.log(child, child.name, child.displayName, child.type);
-        });
+        React.Children.forEach(children, (child) => {});
     };
     renderHeader() {
         if (!this.props.title) {

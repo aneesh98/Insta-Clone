@@ -25,7 +25,7 @@ export default function SimpleFeed(props) {
         getProfilePictureUrl();
         getUserUploadedImages();
     }, []);
-    const mode = 'dev';
+    const mode = '';
     const httpService = axiosInstance;
     const getProfilePictureUrl = () => {
         httpService.get('/getdp/' + auth.user.userid + '/').then((response) => {
