@@ -10,6 +10,5 @@ cd ../backend/insta_backend
 whoami
 source ps-jenkins-env/bin/activate
 eb deploy
-eb ssh --command "./replace_static_file.sh"
 set +x
 echo 'Served successfully.'

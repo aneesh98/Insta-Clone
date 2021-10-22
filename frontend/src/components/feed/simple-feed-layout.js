@@ -25,13 +25,15 @@ export default function SimpleFeed(props) {
         getProfilePictureUrl();
         getUserUploadedImages();
     }, []);
-
+    const mode = 'dev';
     const httpService = axiosInstance;
     const getProfilePictureUrl = () => {
         httpService.get('/getdp/' + auth.user.userid + '/').then((response) => {
             auth.setProfilePicture(
-                'http://localhost:8000/insta_backend' +
-                    response.data.profile_photo
+                mode !== 'dev'
+                    ? response.data.profile_photo
+                    : 'http://localhost:8000/insta_backend' +
+                          response.data.profile_photo
             );
         });
     };
