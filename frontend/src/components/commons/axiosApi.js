@@ -3,7 +3,11 @@ import { getCookie } from '../utils/helpers';
 
 // axios.defaults.xsrfCookieName = 'csrftoken';
 // axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-const url = window.location.protocol + "//" + window.location.hostname + ":8000" + "/insta_backend/";
+const url =
+    window.location.protocol +
+    '//' +
+    window.location.hostname +
+    '/insta_backend/';
 console.log(url);
 const axiosInstance = axios.create({
     baseURL: url,
@@ -11,7 +15,6 @@ const axiosInstance = axios.create({
     headers: {
         'Content-Type': 'application/json',
         accept: 'application/json',
-        Authorization: 'JWT ' + localStorage.getItem('access_token'),
     },
 });
 

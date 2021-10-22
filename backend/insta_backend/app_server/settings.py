@@ -30,13 +30,17 @@ load_dotenv(verbose=True, dotenv_path=os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+DEBUG = True #os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
 'https://mighty-caverns-57560.herokuapp.com/',
-'photoshare-backend-dev.ap-south-1.elasticbeanstalk.com'
+'http://localhost:3000',
+'http://localhost:8000',
+'photoshare-backend-dev.ap-south-1.elasticbeanstalk.com',
+'photosharebackend-env.eba-6zwgveqm.ap-south-1.elasticbeanstalk.com',
+'Photosharebackend-env.eba-6zwgveqm.ap-south-1.elasticbeanstalk.com'
 ]
-
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -62,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.middleware.common.CommonMiddleware',
 ]
 
@@ -125,6 +129,25 @@ else:
         }
     }
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': '/var/log/app-logs/django.log',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }
+
 # DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -167,8 +190,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "build/static"),
 ]
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 AUTH_USER_MODEL = 'insta_backend.CustomUser'
 
 ##### CUSTOM CONFIG #####
@@ -193,14 +216,15 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
-
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://127.0.0.1:3000',
     'http://192.168.0.109:3000',
     'http://localhost:8000',
     'http://192.168.0.109:8000',
-    'http://photoshare-backend-dev.ap-south-1.elasticbeanstalk.com'
+    'http://photoshare-backend-dev.ap-south-1.elasticbeanstalk.com',
+    'http://photosharebackend-env.eba-6zwgveqm.ap-south-1.elasticbeanstalk.com',
+    'http://Photosharebackend-env.eba-6zwgveqm.ap-south-1.elasticbeanstalk.com'
 ]
 
 

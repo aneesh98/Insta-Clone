@@ -3,7 +3,7 @@ from pathlib import Path
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.conf import settings
@@ -21,6 +21,9 @@ import yaml
 def index(request):
     return HttpResponse('Hello, world. You\'re at the polls index')
 
+class SkipAuth(permissions.IsAuthenticated):
+    def has_permission(self, request, view):
+        return True
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     permission_classes = (permissions.AllowAny,)
@@ -29,7 +32,6 @@ class ObtainTokenPairWithColorView(TokenObtainPairView):
 
 class CustomUserCreate(APIView):
     permission_classes = (permissions.AllowAny,)
-
     def post(self, request, format='json'):
         print(request)
         response = {}

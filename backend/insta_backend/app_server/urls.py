@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path('r"^$', render_react),
     re_path(r"^(?:.*)/?$", render_react),
-]
+] \
+              # + static(settings.STATIC_URL, settings.STATIC_ROOT)
 
 

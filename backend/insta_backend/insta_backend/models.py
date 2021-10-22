@@ -24,7 +24,7 @@ def get_profile_picture_path(instance, filename):
 
 class ProfilePicture(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    profile_photo = ImageField(upload_to=get_profile_picture_path, storage=OverwriteStorage())
+    profile_photo = ImageField(upload_to=get_profile_picture_path, storage=MediaStorage())
 
 class UserImages(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

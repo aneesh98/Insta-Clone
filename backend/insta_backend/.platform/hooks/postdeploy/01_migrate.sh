@@ -7,6 +7,7 @@ source "/var/app/venv/staging-LQM1lest/bin/activate" && {
         python manage.py showmigrations;
         # migrate
         python manage.py migrate --noinput;
+        python manage.py collectstatic --noinput;
     else
         echo "this instance is NOT the leader";
     fi
