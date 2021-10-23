@@ -7,7 +7,7 @@ export default function SingleUserView(props) {
         <div>
             <div className="root-view">
                 <img
-                    src={resolveResource(props.src, 8000)}
+                    src={resolveResource(props.src)}
                     className="user-display"
                 />
                 <div
