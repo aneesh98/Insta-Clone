@@ -14,9 +14,15 @@ export const findByType = (children, component) => {
 };
 
 export const resolveResource = (endpoint, port) => {
-    return window.location.protocol + '//' + window.location.hostname + port
-        ? ':' + port
-        : '' + +'/insta_backend' + endpoint;
+    const portNo = port ? ':' + port : '';
+    return (
+        window.location.protocol +
+        '//' +
+        window.location.hostname +
+        portNo +
+        '/insta_backend' +
+        endpoint
+    );
 };
 
 export const getCookie = (name) => {
