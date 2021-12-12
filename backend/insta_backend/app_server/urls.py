@@ -28,6 +28,6 @@ urlpatterns = [
     re_path('r"^$', render_react),
     re_path(r"^(?:.*)/?$", render_react),
 ] \
-              # + static(settings.STATIC_URL, settings.STATIC_ROOT)
+              # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
